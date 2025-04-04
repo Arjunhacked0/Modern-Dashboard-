@@ -1,4 +1,3 @@
-
 # ⚛️ AR Spectro-scope - Modern Frontend Dashboard
 
 **🌐 Live Site:** [modern-dashboard-snowy.vercel.app](https://modern-dashboard-snowy.vercel.app/)  
