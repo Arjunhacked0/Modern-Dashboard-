@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Spectro-scope | Neural Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="cyber-container">
+        <!-- Header -->
+        <header class="cyber-header">
+            <div class="logo-glitch">
+                <span class="glitch" data-text="AR_SPECTRO_SCOPE">AR_SPECTRO_SCOPE</span>
+                <span class="subtitle">NEURAL_INTERFACE v3.2.1</span>
+            </div>
+            <div class="system-status">
+                <div class="status-indicator active"></div>
+                <span>SYSTEM_ACTIVE</span>
+                <div class="terminal-prompt">
+                    <span class="prompt-sign">></span>
+                    <span class="typing-text"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <main class="cyber-grid">
+            <!-- AR Viewport -->
+            <div class="cyber-card viewport">
+                <div class="card-header">
+                    <h3><i class="fas fa-vr-cardboard"></i> AR_VIEWPORT</h3>
+                    <div class="card-actions">
+                        <button class="cyber-button small"><i class="fas fa-expand"></i></button>
+                    </div>
+                </div>
+                <div class="ar-container" id="arViewport">
+                    <div class="scan-animation">
+                        <div class="scan-line"></div>
+                    </div>
+                    <div class="hud-overlay">
+                        <div class="hud-circle"></div>
+                        <div class="hud-crosshair"></div>
+                        <div class="hud-data">
+                            <span>LAT: 34.0522° N</span>
+                            <span>LONG: 118.2437° W</span>
+                            <span>ALT: 89.3m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spectral Analysis -->
+            <div class="cyber-card analysis">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-line"></i> SPECTRAL_ANALYSIS</h3>
+                    <div class="card-actions">
+                        <button class="cyber-button small"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="spectrum-display">
+                    <canvas id="spectrumChart"></canvas>
+                </div>
+                <div class="analysis-results">
+                    <div class="result-item">
+                        <span class="label">COMPOUNDS_DETECTED:</span>
+                        <span class="value highlight">12</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">PRIMARY_ELEMENT:</span>
+                        <span class="value">CARBON (72.8%)</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">SPECTRAL_MATCH:</span>
+                        <span class="value success">98.7% CONFIDENCE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Controls -->
+            <div class="cyber-card controls">
+                <div class="card-header">
+                    <h3><i class="fas fa-sliders-h"></i> SYSTEM_CONTROLS</h3>
+                </div>
+                <div class="control-panel">
+                    <div class="control-group">
+                        <label>SCAN_MODE</label>
+                        <div class="cyber-select">
+                            <select>
+                                <option>STANDARD</option>
+                                <option>DEEP_SCAN</option>
+                                <option>QUANTUM</option>
+                            </select>
+                            <div class="select-arrow"><i class="fas fa-chevron-down"></i></div>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>WAVELENGTH_RANGE</label>
+                        <div class="range-slider">
+                            <input type="range" min="200" max="800" value="400" class="slider" id="wavelengthRange">
+                            <span class="range-value">400-800nm</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-buttons">
+                        <button class="cyber-button danger">
+                            <i class="fas fa-power-off"></i> EMERGENCY_OFF
+                        </button>
+                        <button class="cyber-button" id="initiateScan">
+                            <i class="fas fa-satellite-dish"></i> INITIATE_SCAN
+                        </button>
+                        <button class="cyber-button success">
+                            <i class="fas fa-database"></i> SAVE_DATA
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Stream -->
+            <div class="cyber-card datastream">
+                <div class="card-header">
+                    <h3><i class="fas fa-stream"></i> NEURAL_DATASTREAM</h3>
+                    <div class="card-actions">
+                        <button class="cyber-button small"><i class="fas fa-terminal"></i></button>
+                    </div>
+                </div>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-tabs">
+                            <span class="active">SYSTEM.LOG</span>
+                            <span>SPECTRAL.DATA</span>
+                            <span>DEBUG</span>
+                        </div>
+                    </div>
+                    <div class="terminal-content" id="dataStream">
+                        <!-- Content will be filled by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Diagnostics -->
+            <div class="cyber-card diagnostics">
+                <div class="card-header">
+                    <h3><i class="fas fa-heartbeat"></i> SYSTEM_DIAGNOSTICS</h3>
+                </div>
+                <div class="gauges">
+                    <div class="gauge">
+                        <div class="gauge-body">
+                            <div class="gauge-fill" style="transform: rotate(0.5turn);"></div>
+                            <div class="gauge-cover">78%</div>
+                        </div>
+                        <div class="gauge-label">CPU_LOAD</div>
+                    </div>
+                    <div class="gauge">
+                        <div class="gauge-body">
+                            <div class="gauge-fill" style="transform: rotate(0.3turn);"></div>
+                            <div class="gauge-cover">62%</div>
+                        </div>
+                        <div class="gauge-label">MEMORY</div>
+                    </div>
+                    <div class="gauge">
+                        <div class="gauge-body">
+                            <div class="gauge-fill" style="transform: rotate(0.7turn);"></div>
+                            <div class="gauge-cover">34°C</div>
+                        </div>
+                        <div class="gauge-label">TEMP</div>
+                    </div>
+                </div>
+                <div class="status-grid">
+                    <div class="status-item online">
+                        <i class="fas fa-check-circle"></i> AR_CORE
+                    </div>
+                    <div class="status-item online">
+                        <i class="fas fa-check-circle"></i> SPECTRAL_AI
+                    </div>
+                    <div class="status-item warning">
+                        <i class="fas fa-exclamation-triangle"></i> DATABASE_SYNC
+                    </div>
+                    <div class="status-item offline">
+                        <i class="fas fa-times-circle"></i> QUANTUM_LINK
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="cyber-footer">
+            <div class="connection-status">
+                <span class="pulse"></span>
+                <span>NEURAL_NETWORK_CONNECTED</span>
+            </div>
+            <div class="timestamp">
+                <span id="cyberTime">SYSTEM_TIME: 2023-07-25 14:36:22 UTC</span>
+            </div>
+            <div class="auth-status">
+                <i class="fas fa-user-shield"></i>
+                <span>ADMIN_ACCESS_GRANTED</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
